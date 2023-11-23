@@ -30,7 +30,8 @@ export const StoreModal = () => {
             }
 
             const { data } = await axios.post('/api/stores', values)
-            return data;
+            
+            window.location.assign(`/${data.id}`)
         },
         onError: (error) => {
             if(error instanceof AxiosError){

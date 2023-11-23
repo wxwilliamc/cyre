@@ -1,8 +1,7 @@
 "use client"
 
-import Modal from '@/components/Modal'
 import { useStoreModal } from '@/hooks/use-store-modal'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const SetupPage = () => {
 
@@ -15,11 +14,7 @@ const SetupPage = () => {
     }
   }, [isOpen, onOpen])
 
-  return (
-    <div className='p-12 container px-20 font-mono flex items-center justify-between'>
-      Root Page
-    </div>
-  )
+  return null
 }
 
 export default SetupPage
