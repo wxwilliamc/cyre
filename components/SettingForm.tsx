@@ -15,18 +15,22 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from './ui/input'
 import axios, { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
-import { AlertDialog } from './ui/alert-dialog'
 import AlertModal from './modals/alert-modal'
+import ApiAlert from './ui/api-alert'
+import { useOrigin } from '@/hooks/use-origin'
 
 interface SettingFormProps {
     store: Store
 }
+
+// Under Settings Page
 
 const SettingForm = ({ store }: SettingFormProps) => {
 
     // control alert model
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
+    const origin = useOrigin();
 
     const form = useForm<StoreNameSchemaType>({
         resolver: zodResolver(StoreNameSchema),
@@ -86,12 +90,13 @@ const SettingForm = ({ store }: SettingFormProps) => {
                     toast.error("Store not exists.")
                 }
             } else {
-                toast.error("Something went wrong.")
+                toast.error("Make sure you removed all products and categories first.")
             }
         },
         onSuccess: () => {
             toast.success("Store Deleted.")
             router.refresh();
+            router.push('/');
         }
     })
 
@@ -147,6 +152,15 @@ const SettingForm = ({ store }: SettingFormProps) => {
                 </Button>
             </form>
         </Form>
+
+        <Separator />
+
+        <ApiAlert 
+            title='NEXT_PUBLIC_API_URL'
+            description={`${origin}/api/${store.id}`}
+            variant='public'
+        />
+
     </>
   )
 }
