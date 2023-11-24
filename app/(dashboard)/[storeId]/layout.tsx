@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar"
 import { db } from "@/lib/prisma"
 import { auth } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
@@ -30,9 +31,7 @@ const DashboardLayout = async ({ children, params }: DashboardLayoutProps ) => {
     
     return (
         <>
-            <div className="">
-                This will be Navbar
-            </div>
+            <Navbar />
             
             {/* render all page content created within dashboard*/}
             {children}
