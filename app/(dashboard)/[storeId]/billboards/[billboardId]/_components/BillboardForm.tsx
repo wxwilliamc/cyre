@@ -4,7 +4,7 @@ import { Billboard, Store } from '@prisma/client'
 import React, { useState } from 'react'
 import Heading from '@/components/ui/heading'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, Trash } from 'lucide-react'
+import { Trash } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,8 +16,6 @@ import { Input } from '@/components/ui/input'
 import axios, { AxiosError } from 'axios'
 import { useParams, useRouter } from 'next/navigation'
 import AlertModal from '@/components/modals/alert-modal' 
-import ApiAlert from '@/components/ui/api-alert' 
-import { useOrigin } from '@/hooks/use-origin'
 import ImageUpload from '@/components/ui/image-upload'
 
 interface BillBoardFormProps {
@@ -75,8 +73,8 @@ const BillBoardForm = ({ billBoard }: BillBoardFormProps) => {
         },
         onSuccess: () => {
             toast.success(toastMessage)
-            router.refresh();
             router.push(`/${params.storeId}/billboards`)
+            router.refresh();
         }
     })
 
@@ -111,8 +109,8 @@ const BillBoardForm = ({ billBoard }: BillBoardFormProps) => {
         },
         onSuccess: () => {
             toast.success("Billboard Deleted.")
-            router.refresh();
             router.push(`/${params.storeId}/billboards`);
+            router.refresh();
         }
     })
 
@@ -196,11 +194,6 @@ const BillBoardForm = ({ billBoard }: BillBoardFormProps) => {
                 </Button>
             </form>
         </Form>
-
-        <Separator />
-
-        
-
     </>
   )
 }

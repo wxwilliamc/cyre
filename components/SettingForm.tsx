@@ -95,8 +95,8 @@ const SettingForm = ({ store }: SettingFormProps) => {
         },
         onSuccess: () => {
             toast.success("Store Deleted.")
-            router.refresh();
             router.push('/');
+            router.refresh();
         }
     })
 

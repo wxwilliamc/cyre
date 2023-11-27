@@ -3,13 +3,18 @@
 import { Button } from "@/components/ui/button"
 import Heading from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
-import { Billboard } from "@prisma/client"
 import { Plus } from "lucide-react"
 import { useParams, useRouter } from "next/navigation"
+import { BillboardColumn, columns } from "./column"
+import { DataTable } from "@/components/ui/data-table"
+
+interface BillboardClientProps {
+    data: BillboardColumn[]
+}
 
 // under Billboards Page
 
-const BillboardClient = () => {
+const BillboardClient = ({ data }: BillboardClientProps) => {
 
     const router = useRouter();
     const params = useParams();
@@ -17,9 +22,8 @@ const BillboardClient = () => {
   return (
     <>
         <div className="flex items-center justify-between">
-            {/* TODO: Display current billboard values */}
             <Heading 
-                title="Billboards"
+                title={`Billboards (${data.length})`}
                 description="Manage billboards for your store"
             />
 
@@ -27,11 +31,14 @@ const BillboardClient = () => {
                 <Plus className="w-4 h-4 mr-2"/>
                 Add New
             </Button>
-
-            {/* TODO: Display Billboards */}
         </div>
 
         <Separator />
+
+        {/* searchKey - Dynamic Search as the dataTable could be use on anywhere and we don't know what kind of data will be filter on other components */}
+
+        {/* In this case we know what we want to filter on billboard which is based on label, so we assign it as our searchKey */}
+        <DataTable columns={columns} data={data} searchKey='label'/>
     </>
   )
 }
