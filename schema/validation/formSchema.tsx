@@ -6,3 +6,10 @@ export const StoreNameSchema = z.object({
 })
 
 export type StoreNameSchemaType = z.infer<typeof StoreNameSchema>
+
+export const BillboardSchema = z.object({
+    label: z.string().min(1),
+    imageUrl: z.string().min(1),
+})
+
+export type BillboardSchemaType = z.infer<typeof BillboardSchema>

@@ -8,7 +8,6 @@ import { db } from '@/lib/prisma'
 
 // Under Dashboard Layout.tsx
 
-
 const Navbar = async () => {
 
   const { userId } = auth();

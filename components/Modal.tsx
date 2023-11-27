@@ -10,6 +10,8 @@ interface ModalProps {
     children?: React.ReactNode
 }
 
+// Customize Modal Component
+
 const Modal = ({ title, description, isOpen, onClose, children }: ModalProps ) => {
 
     const onChange = () => {

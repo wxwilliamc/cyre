@@ -92,7 +92,7 @@ export const StoreModal = () => {
                             />
 
                             <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-                                <Button variant='ghost' onClick={storeModal.onClose} disabled={isPending}>
+                                <Button variant='ghost' onClick={storeModal.onClose} disabled={isPending} type="button">
                                     Cancel
                                 </Button>
 
