@@ -13,3 +13,10 @@ export const BillboardSchema = z.object({
 })
 
 export type BillboardSchemaType = z.infer<typeof BillboardSchema>
+
+export const CategorySchema = z.object({
+    name: z.string().min(1),
+    billboardId: z.string().min(1),
+})
+
+export type CategorySchemaType = z.infer<typeof CategorySchema>
