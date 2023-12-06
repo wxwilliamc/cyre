@@ -1,14 +1,14 @@
 "use client"
 
-import { Billboard, Category, Store } from '@prisma/client'
+import { Billboard, Category } from '@prisma/client'
 import React, { useState } from 'react'
 import Heading from '@/components/ui/heading'
 import { Button } from '@/components/ui/button'
-import { Trash, View } from 'lucide-react'
+import { Trash } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { BillboardSchema, BillboardSchemaType, CategorySchema, CategorySchemaType, StoreNameSchema, StoreNameSchemaType } from '@/schema/validation/formSchema'
+import { CategorySchema, CategorySchemaType } from '@/schema/validation/formSchema'
 import { useMutation } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -16,7 +16,6 @@ import { Input } from '@/components/ui/input'
 import axios, { AxiosError } from 'axios'
 import { useParams, useRouter } from 'next/navigation'
 import AlertModal from '@/components/modals/alert-modal' 
-import ImageUpload from '@/components/ui/image-upload'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 interface BillBoardFormProps {
@@ -30,6 +29,7 @@ const CategoryForm = ({ category, billboards }: BillBoardFormProps) => {
 
     // control alert model
     const [isOpen, setIsOpen] = useState(false);
+    
     const router = useRouter();
     const params = useParams()
     const title = category ? 'Edit category' : 'Create new category'
@@ -89,7 +89,7 @@ const CategoryForm = ({ category, billboards }: BillBoardFormProps) => {
         createCategory(values)
     }
 
-    // Delete Billboard
+    // Delete Category
     const { mutate: deleteCategory, isPending: deleting } = useMutation({
         mutationFn: async () => {
             const { data } = await axios.delete(`/api/${params.storeId}/categories/${params.categoryId}`)
@@ -103,14 +103,14 @@ const CategoryForm = ({ category, billboards }: BillBoardFormProps) => {
                 }
 
                 if(error.response?.status === 400){
-                    toast.error("Billboard not exists.")
+                    toast.error("Category not exists.")
                 }
             } else {
-                toast.error("Make sure you removed all categories using this billboard.")
+                toast.error("Make sure you removed all products using this category first.")
             }
         },
         onSuccess: () => {
-            toast.success("Categories Deleted.")
+            toast.success("Category Deleted.")
             router.push(`/${params.storeId}/categories`);
             router.refresh();
         }
