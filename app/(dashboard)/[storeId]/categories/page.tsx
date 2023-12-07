@@ -20,7 +20,7 @@ const CategoriesPage = async ({ params }: { params: { storeId: string } }) => {
   })
 
   // modify the date data type from DateTime to string
-  // Easy for us to display those billboard data to DataTable
+  // Easy for us to display those categories data to DataTable
   const formattedCategories: CategoryColumn[] = categories.map((item) => ({
     id: item.id,
     name: item.name,
