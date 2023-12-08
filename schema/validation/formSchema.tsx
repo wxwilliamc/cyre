@@ -27,3 +27,12 @@ export const SizeSchema = z.object({
 })
 
 export type SizeSchemaType = z.infer<typeof SizeSchema>
+
+export const ColorSchema = z.object({
+    name: z.string().min(1),
+    value: z.string().min(4).regex(/^#/, {
+        message: "String must be a valid color(hex) code"
+    }),
+})
+
+export type ColorSchemaType = z.infer<typeof ColorSchema>
