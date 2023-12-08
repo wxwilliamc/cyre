@@ -47,6 +47,7 @@ const CellAction = ({ data }: CellActionProps) => {
         },
         onSuccess: () => {
             toast.success("Size Deleted.")
+            setIsOpen(false);
             router.refresh();
         }
     })
