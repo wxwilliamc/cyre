@@ -20,6 +20,7 @@ model Store {
   categories Category[]  @relation("StoreToCategory")
   size       Size[]      @relation("StoreToSize")
   color      Color[]     @relation("StoreToColor")
+  product    Product[]   @relation("StoreToProduct")
 }
 
 model Billboard {
@@ -42,6 +43,7 @@ model Category {
   name        String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  product     Product[] @relation("CategoryToProduct")
 }
 
 model Size {
@@ -52,14 +54,45 @@ model Size {
   value     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  product Product[]
 }
 
 model Color {
-  id        String   @id @default(uuid()) @map("_id")
+  id        String    @id @default(uuid()) @map("_id")
   storeId   String
-  store     Store    @relation("StoreToColor", fields: [storeId], references: [id])
+  store     Store     @relation("StoreToColor", fields: [storeId], references: [id])
   name      String
   value     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  product   Product[]
+}
+
+model Product {
+  id          String   @id @default(uuid()) @map("_id")
+  storeId     String
+  store       Store    @relation("StoreToProduct", fields: [storeId], references: [id])
+  categoryId  String
+  category    Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  name        String
+  price       String
+  isFeatured  Boolean  @default(false)
+  isArchieved Boolean  @default(false)
+  sizeId      String
+  size        Size     @relation(fields: [sizeId], references: [id])
+  colorId     String
+  color       Color    @relation(fields: [colorId], references: [id])
+  image       Image[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Image {
+  id        String   @id @default(uuid()) @map("_id")
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
