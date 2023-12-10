@@ -16,3 +16,8 @@ export function formatPrice(
       maximumFractionDigits: 2 // 2 decimal places
     }).format(numericPrice)
   }
+
+  export const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: "USD",
+  })

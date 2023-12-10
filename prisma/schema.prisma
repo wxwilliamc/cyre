@@ -77,7 +77,7 @@ model Product {
   categoryId String
   category   Category    @relation("CategoryToProduct", fields: [categoryId], references: [id])
   name       String
-  price      String
+  price      Float
   isFeatured Boolean     @default(false)
   isArchived Boolean     @default(false)
   sizeId     String
